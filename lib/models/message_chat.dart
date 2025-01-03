@@ -4,30 +4,30 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageChat {
-  final String senderID;
+  final String senderEmail;
   final String senderUsername;
-  final String receiverID;
+  final String receiverEmail;
   final String msgData;
   final Timestamp timestamp;
   MessageChat({
-    required this.senderID,
+    required this.senderEmail,
     required this.senderUsername,
-    required this.receiverID,
+    required this.receiverEmail,
     required this.msgData,
     required this.timestamp,
   });
 
   MessageChat copyWith({
-    String? senderID,
+    String? senderEmail,
     String? senderUsername,
-    String? receiverID,
+    String? receiverEmail,
     String? msgData,
     Timestamp? timestamp,
   }) {
     return MessageChat(
-      senderID: senderID ?? this.senderID,
+      senderEmail: senderEmail ?? this.senderEmail,
       senderUsername: senderUsername ?? this.senderUsername,
-      receiverID: receiverID ?? this.receiverID,
+      receiverEmail: receiverEmail ?? this.receiverEmail,
       msgData: msgData ?? this.msgData,
       timestamp: timestamp ?? this.timestamp,
     );
@@ -35,9 +35,9 @@ class MessageChat {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'senderID': senderID,
+      'senderEmail': senderEmail,
       'senderUsername': senderUsername,
-      'receiverID': receiverID,
+      'receiverEmail': receiverEmail,
       'msgData': msgData,
       'timestamp': timestamp,
     };
@@ -45,11 +45,11 @@ class MessageChat {
 
   factory MessageChat.fromMap(Map<String, dynamic> map) {
     return MessageChat(
-      senderID: map['senderID'] as String,
-      senderUsername: map['senderUsername'] as String,
-      receiverID: map['receiverID'] as String,
-      msgData: map['msgData'] as String,
-      timestamp: map['timestamp'],
+      senderEmail: map['senderEmail'] as dynamic,
+      senderUsername: map['senderUsername'] as dynamic,
+      receiverEmail: map['receiverEmail'] as dynamic,
+      msgData: map['msgData'] as dynamic,
+      timestamp: map['timestamp'] as dynamic,
     );
   }
 
@@ -60,25 +60,25 @@ class MessageChat {
 
   @override
   String toString() {
-    return 'MessageChat(senderID: $senderID, senderUsername: $senderUsername, receiverID: $receiverID, msgData: $msgData, timestamp: $timestamp)';
+    return 'MessageChat(senderEmail: $senderEmail, senderUsername: $senderUsername, receiverEmail: $receiverEmail, msgData: $msgData, timestamp: $timestamp)';
   }
 
   @override
   bool operator ==(covariant MessageChat other) {
     if (identical(this, other)) return true;
 
-    return other.senderID == senderID &&
+    return other.senderEmail == senderEmail &&
         other.senderUsername == senderUsername &&
-        other.receiverID == receiverID &&
+        other.receiverEmail == receiverEmail &&
         other.msgData == msgData &&
         other.timestamp == timestamp;
   }
 
   @override
   int get hashCode {
-    return senderID.hashCode ^
+    return senderEmail.hashCode ^
         senderUsername.hashCode ^
-        receiverID.hashCode ^
+        receiverEmail.hashCode ^
         msgData.hashCode ^
         timestamp.hashCode;
   }
