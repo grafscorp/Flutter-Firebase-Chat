@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter_chat/services/user_data_servide.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -10,12 +12,14 @@ class UserChat {
   String? photoUrl;
   String? desc;
   String uid;
+  List<dynamic?>? latestChats;
   UserChat({
     required this.username,
     required this.email,
     this.photoUrl,
     this.desc,
     required this.uid,
+    this.latestChats,
   });
 
   UserChat copyWith({
@@ -24,6 +28,7 @@ class UserChat {
     String? photoUrl,
     String? desc,
     String? uid,
+    List<dynamic>? latestChats,
   }) {
     return UserChat(
       username: username ?? this.username,
@@ -31,6 +36,7 @@ class UserChat {
       photoUrl: photoUrl ?? this.photoUrl,
       desc: desc ?? this.desc,
       uid: uid ?? this.uid,
+      latestChats: latestChats ?? this.latestChats,
     );
   }
 
@@ -41,6 +47,7 @@ class UserChat {
       'photoUrl': photoUrl,
       'desc': desc,
       'uid': uid,
+      'latestChats': latestChats,
     };
   }
 
@@ -51,6 +58,9 @@ class UserChat {
       photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
       desc: map['desc'] != null ? map['desc'] as String : null,
       uid: map['uid'] as String,
+      latestChats: map['latestChats'] != null
+          ? List<String>.from((map['latestChats'] as List<String>))
+          : null,
     );
   }
 
@@ -61,7 +71,7 @@ class UserChat {
 
   @override
   String toString() {
-    return 'UserChat(username: $username, email: $email, photoUrl: $photoUrl, desc: $desc, uid: $uid)';
+    return 'UserChat(username: $username, email: $email, photoUrl: $photoUrl, desc: $desc, uid: $uid, latestChats: $latestChats)';
   }
 
   @override
@@ -72,7 +82,8 @@ class UserChat {
         other.email == email &&
         other.photoUrl == photoUrl &&
         other.desc == desc &&
-        other.uid == uid;
+        other.uid == uid &&
+        listEquals(other.latestChats, latestChats);
   }
 
   @override
@@ -81,7 +92,8 @@ class UserChat {
         email.hashCode ^
         photoUrl.hashCode ^
         desc.hashCode ^
-        uid.hashCode;
+        uid.hashCode ^
+        latestChats.hashCode;
   }
 
   static Future<UserChat> parseUserFirebase(User user) async {
@@ -89,10 +101,26 @@ class UserChat {
     final _userDat = await userData.getUserData(user);
 
     return UserChat(
-        username: _userDat["username"],
-        email: _userDat["email"],
-        uid: _userDat["uid"],
-        photoUrl: _userDat["photoUrl"],
-        desc: _userDat["about"]);
+      username: _userDat["username"],
+      email: _userDat["email"],
+      uid: _userDat["uid"],
+      photoUrl: _userDat["photoUrl"],
+      desc: _userDat["about"],
+      latestChats: _userDat["latestChats"] as List<dynamic>,
+    );
+  }
+
+  static Future<UserChat> parseUserFirebaseEmail(String email) async {
+    UserDataServide userData = UserDataServide();
+    final _userDat = await userData.getUserDataFromUserEmail(email);
+
+    return UserChat(
+      username: _userDat["username"],
+      email: _userDat["email"],
+      uid: _userDat["uid"],
+      photoUrl: _userDat["photoUrl"],
+      desc: _userDat["about"],
+      latestChats: _userDat["latestChats"] as List<dynamic>,
+    );
   }
 }
