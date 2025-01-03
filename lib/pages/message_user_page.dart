@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/components/input_conteiner.dart';
 import 'package:flutter_chat/components/message_box.dart';
+import 'package:flutter_chat/components/message_list.dart';
+import 'package:flutter_chat/models/user_chat.dart';
+import 'package:flutter_chat/services/chat_service.dart';
 
 class MessageUserPage extends StatefulWidget {
-  const MessageUserPage({super.key});
+  MessageUserPage({
+    super.key,
+    required this.toUser,
+  });
+  UserChat toUser;
 
   @override
   State<MessageUserPage> createState() => _MessageUserPageState();
@@ -13,23 +20,44 @@ class _MessageUserPageState extends State<MessageUserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: CircleAvatar(
-            foregroundImage: AssetImage("assets/images/template_avatar.png"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_rounded),
+            ),
+          ),
+          title: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                foregroundImage:
+                    AssetImage("assets/images/template_avatar.png"),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                widget.toUser.username,
+                style: TextStyle(fontSize: 30),
+              ),
+            ],
           ),
         ),
-        title: Text("Username"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          MessageBox(
-            time: "20:00",
+          Expanded(child: MessageList(toUser: widget.toUser)),
+          InputConteiner(
+            toUser: widget.toUser,
           ),
-          InputConteiner(),
         ],
       ),
     );
