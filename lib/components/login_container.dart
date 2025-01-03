@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/provider/login_provider.dart';
+import 'package:flutter_chat/services/login_auth_service.dart';
 import 'package:provider/provider.dart';
 
 class LoginContainer extends StatefulWidget {
@@ -10,6 +11,8 @@ class LoginContainer extends StatefulWidget {
 }
 
 class _LoginContainerState extends State<LoginContainer> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginProvider>(
@@ -18,6 +21,7 @@ class _LoginContainerState extends State<LoginContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextField(
+            controller: usernameController,
             decoration: InputDecoration(
               icon: Icon(Icons.person),
               hintText: "Username",
@@ -31,6 +35,7 @@ class _LoginContainerState extends State<LoginContainer> {
           ),
           //Password field
           TextField(
+            controller: passController,
             obscureText: true,
             decoration: InputDecoration(
               icon: Icon(Icons.shield),
@@ -50,7 +55,10 @@ class _LoginContainerState extends State<LoginContainer> {
             //style: ButtonStyle(backgroundColor: Colors.amberAccent),
             //style: Theme.of(context).buttonTheme.,
             style: Theme.of(context).elevatedButtonTheme.style,
-            onPressed: () {},
+            onPressed: () async {
+              LoginAuthService.loginUser(
+                  usernameController.text, passController.text, context);
+            },
             child: Text(
               "Log In",
             ),
