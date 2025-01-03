@@ -1,5 +1,8 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/provider/login_provider.dart';
+import 'package:flutter_chat/services/login_auth_service.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationContainer extends StatefulWidget {
@@ -11,12 +14,15 @@ class RegistrationContainer extends StatefulWidget {
 
 class _RegistrationContainerState extends State<RegistrationContainer> {
   final maxPasswordLenght = 20;
-  final minPasswordLenght = 7;
+  final minPasswordLenght = 6;
 
+  final userTextController = TextEditingController();
   final passwordFieldController = TextEditingController();
   final rePasswordFieldController = TextEditingController();
   bool isPasswordValid = true;
   bool isRePasswordValid = true;
+
+  void createUser() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,7 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextField(
+            controller: userTextController,
             decoration: InputDecoration(
               icon: Icon(Icons.person),
               hintText: "Username",
@@ -51,16 +58,10 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
                     ? "Password should have from $minPasswordLenght to $maxPasswordLenght."
                     : null),
             onChanged: (inputPassText) {
-              if (inputPassText.length > maxPasswordLenght ||
-                  inputPassText.length < minPasswordLenght) {
-                setState(() {
-                  isPasswordValid = false;
-                });
-              } else {
-                setState(() {
-                  isPasswordValid = true;
-                });
-              }
+              setState(() {
+                isPasswordValid = !(inputPassText.length > maxPasswordLenght ||
+                    inputPassText.length < minPasswordLenght);
+              });
             },
           ),
           SizedBox(
@@ -68,27 +69,22 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
           ),
           //Repeat Password Field
           TextField(
-            controller: rePasswordFieldController,
-            obscureText: true,
-            decoration: InputDecoration(
-                icon: Icon(Icons.shield),
-                hintText: "Repeat Password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                errorText: !isRePasswordValid ? "Passwords arent same" : null),
-            onChanged: (inputRePassText) {
-              if (inputRePassText != passwordFieldController.text) {
+              controller: rePasswordFieldController,
+              obscureText: true,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.shield),
+                  hintText: "Confirm Password",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  errorText:
+                      !isRePasswordValid ? "Passwords arent same" : null),
+              onChanged: (inputRePassText) {
                 setState(() {
-                  isRePasswordValid = false;
+                  isRePasswordValid =
+                      !(inputRePassText != passwordFieldController.text);
                 });
-              } else {
-                setState(() {
-                  isRePasswordValid = true;
-                });
-              }
-            },
-          ),
+              }),
           SizedBox(
             height: 30,
           ),
@@ -96,14 +92,16 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
           //Buttons
           //Create Account Button
           ElevatedButton(
-            //style: ButtonStyle(backgroundColor: Colors.amberAccent),
-            //style: Theme.of(context).buttonTheme.,
             style: Theme.of(context).elevatedButtonTheme.style,
-            onPressed: () {},
             child: Text(
               "Create an Account",
-              //style: Theme.of(context).textTheme.bodyMedium,
             ),
+            onPressed: () async {
+              if (isPasswordValid && isRePasswordValid) {
+                LoginAuthService.createUser(userTextController.text,
+                    passwordFieldController.text, context);
+              }
+            },
           ),
           SizedBox(
             height: 10,
