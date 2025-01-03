@@ -7,17 +7,11 @@ AppBar getAppBarMyProfile(BuildContext context) {
     title: Text("My Profile"),
     actions: [
       IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return SettingPage();
-                },
-              ),
-            );
-          },
-          icon: Icon(Icons.settings))
+        onPressed: () {
+          Navigator.pushNamed(context, '/profile/settings');
+        },
+        icon: Icon(Icons.settings),
+      )
     ],
   );
 }
