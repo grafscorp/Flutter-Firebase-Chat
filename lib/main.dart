@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/firebase_options.dart';
+import 'package:flutter_chat/pages/account_page.dart';
 import 'package:flutter_chat/pages/auth_page.dart';
 import 'package:flutter_chat/pages/home_page.dart';
 import 'package:flutter_chat/pages/login_page.dart';
 import 'package:flutter_chat/pages/message_user_page.dart';
+import 'package:flutter_chat/pages/setting_page.dart';
 import 'package:flutter_chat/themes/flutter_midnight_neon_theme.dart';
 
 void main() async {
@@ -23,7 +25,12 @@ class MainApp extends StatelessWidget {
       theme: FluttterMidnightNeonTheme.lightTheme,
       darkTheme: FluttterMidnightNeonTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (BuildContext context) => AuthPage(),
+        '/home': (BuildContext context) => HomePage(),
+        '/profile/settings': (BuildContext context) => SettingPage()
+      },
     );
   }
 }
