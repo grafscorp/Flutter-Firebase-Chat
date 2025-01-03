@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 
 class PostListTile extends StatelessWidget {
-  PostListTile({super.key, required this.userName, required this.data});
+  PostListTile(
+      {super.key, required this.userName, required this.data, this.time});
 
   String? userNameAvatar;
-  String userName;
+  String? userName;
   String data;
+  Timestamp? time;
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +38,31 @@ class PostListTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      userName,
-                      overflow: TextOverflow.ellipsis,
+                      userName != null ? userName! : "Error",
+                      //userName,
+                      //overflow: TextOverflow.ellipsis,
                     ),
-                    Text(DateTime.now().toString()),
+                    time != null ? Text(getTime(time!)) : SizedBox()
                   ],
                 ),
               )
             ],
           ),
           Divider(),
-          Text(data),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(data),
+            ],
+          ),
         ],
       ),
     );
+  }
+
+  String getTime(Timestamp _time) {
+    DateTime newTime = _time.toDate();
+    String stringTime = formatDate(newTime, [dd, '-', mm, '-', yyyy]);
+    return stringTime;
   }
 }
