@@ -26,11 +26,12 @@ class _InputConteinerState extends State<InputConteiner> {
                   hintText: "Message...",
                   suffixIcon: IconButton(
                     onPressed: () async {
-                      await _chatService.sendMessage(
-                          widget.toUser.email, _textController.text);
+                      var msgText = _textController.text;
                       setState(() {
                         _textController.clear();
                       });
+                      await _chatService.sendMessage(
+                          widget.toUser.email, msgText);
                     },
                     icon: Icon(Icons.send),
                   ),
