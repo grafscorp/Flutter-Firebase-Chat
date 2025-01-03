@@ -25,7 +25,6 @@ class LoginAuthService {
           .createUserWithEmailAndPassword(email: username, password: pass);
 
       _createUserDocument(userCredential);
-      print("ERROR");
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -66,10 +65,11 @@ class LoginAuthService {
         .set({
       "email": userCred.user!.email,
       "username": userCred.user!.email!.replaceAll(userMail, ""),
-      "photoUrl": userCred.user!.photoURL,
+      "photoUrl": "",
       "about": "",
       "uid": userCred.user!.uid,
-      "userPosts": ""
+      "userPosts": "",
+      "latestChats": []
     });
   }
 }
