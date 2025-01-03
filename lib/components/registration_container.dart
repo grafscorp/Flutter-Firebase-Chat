@@ -98,7 +98,8 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
             ),
             onPressed: () async {
               if (isPasswordValid && isRePasswordValid) {
-                LoginAuthService.createUser(userTextController.text,
+                //
+                await LoginAuthService.createUser(userTextController.text,
                     passwordFieldController.text, context);
               }
             },
@@ -113,6 +114,7 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
           //Log Out Button
           ElevatedButton(
             onPressed: () {
+              //
               loginProvider.changeLoginPage(isCreateAccount: false);
             },
             child: Text("Log In"),
