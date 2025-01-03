@@ -10,7 +10,8 @@ class MessageBox extends StatelessWidget {
   bool isMyMessage = false;
   @override
   Widget build(BuildContext context) {
-    isMyMessage = msgData.senderID == FirebaseAuth.instance.currentUser!.uid;
+    isMyMessage =
+        msgData.senderEmail != FirebaseAuth.instance.currentUser!.email;
     return Row(
       mainAxisAlignment:
           isMyMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -53,6 +54,6 @@ class MessageBox extends StatelessWidget {
   }
 
   String getTimeMessage(Timestamp time) {
-    return formatDate(time.toDate(), [HH, '-', nn]);
+    return formatDate(time.toDate(), [HH, ':', nn]);
   }
 }
