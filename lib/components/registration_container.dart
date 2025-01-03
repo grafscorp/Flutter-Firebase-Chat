@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat/provider/LoginProvider.dart';
+import 'package:flutter_chat/provider/login_provider.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationContainer extends StatefulWidget {
