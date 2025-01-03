@@ -27,7 +27,7 @@ class _InputConteinerState extends State<InputConteiner> {
                   suffixIcon: IconButton(
                     onPressed: () async {
                       await _chatService.sendMessage(
-                          widget.toUser.uid, _textController.text);
+                          widget.toUser.email, _textController.text);
                       setState(() {
                         _textController.clear();
                       });
