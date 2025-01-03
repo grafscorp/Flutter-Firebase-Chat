@@ -1,13 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/models/message_chat.dart';
 
 class MessageBox extends StatelessWidget {
-  MessageBox({super.key, required this.time});
+  MessageBox({super.key, required this.msgData});
+  MessageChat msgData;
   bool isMyMessage = false;
-  String time;
   @override
   Widget build(BuildContext context) {
+    isMyMessage = msgData.senderID == FirebaseAuth.instance.currentUser!.uid;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment:
+          isMyMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Flexible(
           child: Padding(
@@ -32,10 +38,10 @@ class MessageBox extends StatelessWidget {
                       : CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "aasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadasdadsdad",
+                      msgData.msgData,
                       overflow: TextOverflow.visible,
                     ),
-                    Text(time)
+                    Text(getTimeMessage(msgData.timestamp))
                   ],
                 ),
               ),
@@ -44,5 +50,9 @@ class MessageBox extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String getTimeMessage(Timestamp time) {
+    return formatDate(time.toDate(), [HH, '-', nn]);
   }
 }
