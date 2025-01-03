@@ -1,4 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/pages/account_page.dart';
 import 'package:flutter_chat/pages/messages_page.dart';
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     PostsPage(),
     MessagesPage(),
     UsersPage(),
-    MyAccountPage()
+    MyAccountPage(),
   ];
 
   @override
