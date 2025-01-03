@@ -27,7 +27,9 @@ class _PostsPageState extends State<PostsPage> {
               stream: postDataBase.getPostsStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 } else if (snapshot.hasError) {
                   return Text("Error");
                 } else if (snapshot.hasData) {
@@ -47,7 +49,9 @@ class _PostsPageState extends State<PostsPage> {
                     );
                   }
                 }
-                return CircularProgressIndicator();
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),
