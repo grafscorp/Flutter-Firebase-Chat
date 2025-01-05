@@ -12,7 +12,7 @@ class UserChat {
   String? photoUrl;
   String? desc;
   String uid;
-  List<dynamic?>? latestChats;
+  List<dynamic>? latestChats;
   UserChat({
     required this.username,
     required this.email,
