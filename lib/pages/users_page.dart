@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/components/info_dialogs.dart';
+import 'package:flutter_chat/components/loading_chat_indicator.dart';
 import 'package:flutter_chat/components/user_list_tile_circle.dart';
 import 'package:flutter_chat/models/user_chat.dart';
 
@@ -31,16 +30,17 @@ class _UsersPageState extends State<UsersPage> {
                 showErrorDialog(
                     context, "Ошибка", "Не удалось загрузить пользователей");
               } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return LoadingChatIndicator();
               } else if (snapshot.hasData) {
                 final users = snapshot.data!.docs;
                 return Column(
                   children: [
                     Expanded(
                       child: GridView.builder(
+                        shrinkWrap: true,
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: maxRowUserList),
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 250),
                         itemCount: users.length,
                         itemBuilder: (context, index) {
                           return UserListTileCircle(
@@ -61,7 +61,7 @@ class _UsersPageState extends State<UsersPage> {
                   ],
                 );
               }
-              return CircularProgressIndicator();
+              return LoadingChatIndicator();
             },
           ),
         ));
