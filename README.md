@@ -2,7 +2,7 @@
 
 This is an application created on Flutter and uses Firebase capabilities for authorization, cloud storage, and hosting. It provides its users with the ability to create posts, communicate with other users in real time, and edit their data. Thanks to the use of Firebase functionality, the application has excellent performance and supports heavy loads.
 
-##Preview 
+## Preview 
 ### Authorization Page
 <img src="https://github.com/user-attachments/assets/0f9990f6-0bb2-4eaf-86c3-29a07c489b7d" width="213" height="480"/>
 
