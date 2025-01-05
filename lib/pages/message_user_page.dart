@@ -8,7 +8,7 @@ class MessageUserPage extends StatefulWidget {
     super.key,
     required this.toUser,
   });
-  UserChat toUser;
+  final UserChat toUser;
 
   @override
   State<MessageUserPage> createState() => _MessageUserPageState();
@@ -48,15 +48,20 @@ class _MessageUserPageState extends State<MessageUserPage> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(child: MessageList(toUser: widget.toUser)),
-          InputConteiner(
-            toUser: widget.toUser,
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 1000),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: MessageList(toUser: widget.toUser)),
+              InputConteiner(
+                toUser: widget.toUser,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
