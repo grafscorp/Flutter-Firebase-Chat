@@ -15,8 +15,11 @@ class _InputConteinerState extends State<InputConteiner> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 25, top: 10, left: 10, right: 10),
-      color: Colors.black87,
+      padding: EdgeInsets.only(bottom: 45, top: 20, left: 20, right: 20),
+      decoration: BoxDecoration(
+          color: Colors.black87,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40), topRight: Radius.circular(40))),
       child: Row(
         children: [
           Expanded(
