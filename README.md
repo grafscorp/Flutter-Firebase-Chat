@@ -6,17 +6,7 @@ This is an application created on Flutter and uses Firebase capabilities for aut
 [FlutterChat](https://flutter-firebase-chat-a8bf6.web.app)
 
 ## Preview 
-### Authorization Page
-<img src="https://github.com/user-attachments/assets/0f9990f6-0bb2-4eaf-86c3-29a07c489b7d" width="213" height="480"/>
+### Authorization Page, Users Page, Messages Page, Posts Page, Profile/Setting Page
+<img src="https://github.com/user-attachments/assets/0f9990f6-0bb2-4eaf-86c3-29a07c489b7d" width="213" height="480"/> <img src="https://github.com/user-attachments/assets/4324e474-b97c-4f28-87f3-947b01c022a1" width="213" height="480"/> <img src="https://github.com/user-attachments/assets/e1495df1-968d-4d03-a38c-cb27156e5983" width="213" height="480"/>
 
-### Users Page 
-<img src="https://github.com/user-attachments/assets/4324e474-b97c-4f28-87f3-947b01c022a1" width="213" height="480"/>
-
-### Messages Page
-<img src="https://github.com/user-attachments/assets/e1495df1-968d-4d03-a38c-cb27156e5983" width="213" height="480"/>
-
-### Posts Page
-<img src="https://github.com/user-attachments/assets/6fe0a841-5406-4deb-9220-688b56e9eab6" width="213" height="480"/>
-
-### Profile/Setting Page
-<img src="https://github.com/user-attachments/assets/dbe06ab6-7abb-487d-9a84-14d7eeafabf7" width="213" height="480"/>
+<img src="https://github.com/user-attachments/assets/6fe0a841-5406-4deb-9220-688b56e9eab6" width="213" height="480"/><img src="https://github.com/user-attachments/assets/dbe06ab6-7abb-487d-9a84-14d7eeafabf7" width="213" height="480"/>
