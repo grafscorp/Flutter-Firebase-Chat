@@ -17,9 +17,12 @@ class _InputConteinerState extends State<InputConteiner> {
     return Container(
       padding: EdgeInsets.only(bottom: 45, top: 20, left: 20, right: 20),
       decoration: BoxDecoration(
-          color: Colors.black87,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40))),
+        color: Colors.black87,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
       child: Row(
         children: [
           Expanded(
@@ -33,8 +36,9 @@ class _InputConteinerState extends State<InputConteiner> {
                       setState(() {
                         _textController.clear();
                       });
-                      await _chatService.sendMessage(
-                          widget.toUser.email, msgText);
+                      if (!msgText.isEmpty)
+                        await _chatService.sendMessage(
+                            widget.toUser.email, msgText);
                     },
                     icon: Icon(Icons.send),
                   ),
