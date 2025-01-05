@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class LoginAuthService {
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorDialog(context, "Failed to create a user",
-          "Verify that the username is correct.");
+          "Verify that the username is correct.\n$e");
     }
   }
 
@@ -52,7 +51,7 @@ class LoginAuthService {
     } on FirebaseException catch (e) {
       Navigator.pop(context);
       showErrorDialog(context, "The login attempt failed",
-          "Verify that your password or username is correct");
+          "Verify that your password or username is correct\n$e");
     }
   }
 
