@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final spaceBetween = Size(0, 10);
-
+  final widgetFields = 400.0;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LoginProvider>(
@@ -49,8 +49,12 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40,
                     ),
                     loginProvider.isCreateAccountPage
-                        ? RegistrationContainer()
-                        : LoginContainer()
+                        ? RegistrationContainer(
+                            wightFileds: widgetFields,
+                          )
+                        : LoginContainer(
+                            widthFields: widgetFields,
+                          )
                   ],
                 ),
               ),

@@ -4,8 +4,8 @@ import 'package:flutter_chat/services/login_auth_service.dart';
 import 'package:provider/provider.dart';
 
 class LoginContainer extends StatefulWidget {
-  const LoginContainer({super.key});
-
+  const LoginContainer({super.key, required this.widthFields});
+  final double widthFields;
   @override
   State<LoginContainer> createState() => _LoginContainerState();
 }
@@ -13,6 +13,7 @@ class LoginContainer extends StatefulWidget {
 class _LoginContainerState extends State<LoginContainer> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginProvider>(
@@ -20,13 +21,16 @@ class _LoginContainerState extends State<LoginContainer> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextField(
-            controller: usernameController,
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: "Username",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
+          SizedBox(
+            width: widget.widthFields,
+            child: TextField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Username",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
           ),
@@ -34,14 +38,17 @@ class _LoginContainerState extends State<LoginContainer> {
             height: 15,
           ),
           //Password field
-          TextField(
-            controller: passController,
-            obscureText: true,
-            decoration: InputDecoration(
-              icon: Icon(Icons.shield),
-              hintText: "Password",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
+          SizedBox(
+            width: widget.widthFields,
+            child: TextField(
+              controller: passController,
+              obscureText: true,
+              decoration: InputDecoration(
+                icon: Icon(Icons.shield),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
           ),
