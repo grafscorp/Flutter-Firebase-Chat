@@ -5,8 +5,8 @@ import 'package:flutter_chat/pages/message_user_page.dart';
 class MessageListTile extends StatelessWidget {
   MessageListTile({super.key, required this.user, this.newMessages});
 
-  UserChat user;
-  int? newMessages;
+  final UserChat user;
+  final int? newMessages;
   @override
   Widget build(BuildContext context) {
     return ListTile(

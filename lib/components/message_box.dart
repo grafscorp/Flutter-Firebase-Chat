@@ -6,11 +6,10 @@ import 'package:flutter_chat/models/message_chat.dart';
 
 class MessageBox extends StatelessWidget {
   MessageBox({super.key, required this.msgData});
-  MessageChat msgData;
-  bool isMyMessage = false;
+  final MessageChat msgData;
   @override
   Widget build(BuildContext context) {
-    isMyMessage =
+    bool isMyMessage =
         msgData.senderEmail != FirebaseAuth.instance.currentUser!.email;
     return Row(
       mainAxisAlignment:

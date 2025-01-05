@@ -29,9 +29,13 @@ class _PostEditState extends State<PostEdit> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    if (postController.text.isEmpty) return;
+                    final postText = postController.text;
+                    setState(() {
+                      postController.clear();
+                    });
+                    if (postText.isEmpty) return;
                     PostsDatabase postsDatabase = PostsDatabase();
-                    await postsDatabase.addPost(postController.text);
+                    await postsDatabase.addPost(postText);
                     Navigator.pop(context);
                   },
                   icon: Icon(

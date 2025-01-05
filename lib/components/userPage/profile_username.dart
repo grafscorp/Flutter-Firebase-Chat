@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class ProfileUsername extends StatefulWidget {
   ProfileUsername({super.key, required this.userId, required this.username});
-  String userId;
-  String? username;
+  final String userId;
+  final String? username;
   @override
   State<ProfileUsername> createState() => _ProfileUsernameState();
 }

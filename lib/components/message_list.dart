@@ -8,7 +8,7 @@ import 'package:flutter_chat/services/chat_service.dart';
 
 class MessageList extends StatefulWidget {
   MessageList({super.key, required this.toUser});
-  UserChat toUser;
+  final UserChat toUser;
   @override
   State<MessageList> createState() => _MessageListState();
 }

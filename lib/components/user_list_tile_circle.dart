@@ -5,7 +5,7 @@ import 'package:flutter_chat/pages/account_page.dart';
 class UserListTileCircle extends StatelessWidget {
   UserListTileCircle({super.key, required this.user});
 
-  UserChat user;
+  final UserChat user;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +13,7 @@ class UserListTileCircle extends StatelessWidget {
       height: 150,
       width: 150,
       child: InkWell(
+        borderRadius: BorderRadius.circular(150),
         radius: 150,
         child: Container(
           padding: EdgeInsets.all(20),
@@ -33,7 +34,7 @@ class UserListTileCircle extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                user.username != null ? user.username! : "Error",
+                user.username,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 20),
               ),
