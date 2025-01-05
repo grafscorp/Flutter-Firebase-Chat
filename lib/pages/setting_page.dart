@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat/pages/auth_page.dart';
-import 'package:flutter_chat/pages/login_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

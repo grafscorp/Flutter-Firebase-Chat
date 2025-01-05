@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/components/input_conteiner.dart';
-import 'package:flutter_chat/components/message_box.dart';
 import 'package:flutter_chat/components/message_list.dart';
 import 'package:flutter_chat/models/user_chat.dart';
-import 'package:flutter_chat/services/chat_service.dart';
 
 class MessageUserPage extends StatefulWidget {
   MessageUserPage({

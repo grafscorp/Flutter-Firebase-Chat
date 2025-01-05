@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat/pages/setting_page.dart';
 
 AppBar getAppBarMyProfile(BuildContext context) {
   return AppBar(
