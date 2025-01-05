@@ -4,7 +4,7 @@ import 'package:flutter_chat/services/chat_service.dart';
 
 class InputConteiner extends StatefulWidget {
   InputConteiner({super.key, required this.toUser});
-  UserChat toUser;
+  final UserChat toUser;
   @override
   State<InputConteiner> createState() => _InputConteinerState();
 }
