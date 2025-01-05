@@ -1,5 +1,5 @@
 name: flutter_chat
-description: "A new Flutter project."
+description: "This is a web chat created on Flutter and Firebase. Visitors can communicate with each other in real time, as well as share their posts with other participants. The chat has a simple and intuitive interface, and it also has all the features of a modern chat, including sending emoticons and images."
 publish_to: 'none'
 version: 0.1.0
 
