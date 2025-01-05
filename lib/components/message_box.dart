@@ -6,11 +6,11 @@ import 'package:flutter_chat/models/message_chat.dart';
 
 class MessageBox extends StatelessWidget {
   MessageBox({super.key, required this.msgData});
-  MessageChat msgData;
-  bool isMyMessage = false;
+  final MessageChat msgData;
   @override
   Widget build(BuildContext context) {
-    isMyMessage = msgData.senderID == FirebaseAuth.instance.currentUser!.uid;
+    bool isMyMessage =
+        msgData.senderEmail != FirebaseAuth.instance.currentUser!.email;
     return Row(
       mainAxisAlignment:
           isMyMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -53,6 +53,6 @@ class MessageBox extends StatelessWidget {
   }
 
   String getTimeMessage(Timestamp time) {
-    return formatDate(time.toDate(), [HH, '-', nn]);
+    return formatDate(time.toDate(), [HH, ':', nn]);
   }
 }

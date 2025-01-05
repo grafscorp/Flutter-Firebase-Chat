@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileUserAvatar extends StatelessWidget {
   ProfileUserAvatar({super.key, required this.userId, this.photoUrl});
 
-  String userId;
-  String? photoUrl;
+  final String userId;
+  final String? photoUrl;
 
   final raduisAcatar = 100.0;
 

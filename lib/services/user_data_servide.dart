@@ -8,4 +8,12 @@ class UserDataServide {
         .doc(user.email)
         .get();
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDataFromUserEmail(
+      String userEmail) async {
+    return await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userEmail)
+        .get();
+  }
 }

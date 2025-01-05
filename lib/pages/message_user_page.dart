@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/components/input_conteiner.dart';
-import 'package:flutter_chat/components/message_box.dart';
 import 'package:flutter_chat/components/message_list.dart';
 import 'package:flutter_chat/models/user_chat.dart';
-import 'package:flutter_chat/services/chat_service.dart';
 
 class MessageUserPage extends StatefulWidget {
   MessageUserPage({
     super.key,
     required this.toUser,
   });
-  UserChat toUser;
+  final UserChat toUser;
 
   @override
   State<MessageUserPage> createState() => _MessageUserPageState();
@@ -50,15 +48,20 @@ class _MessageUserPageState extends State<MessageUserPage> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(child: MessageList(toUser: widget.toUser)),
-          InputConteiner(
-            toUser: widget.toUser,
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 1000),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: MessageList(toUser: widget.toUser)),
+              InputConteiner(
+                toUser: widget.toUser,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

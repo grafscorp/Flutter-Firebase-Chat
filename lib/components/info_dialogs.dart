@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 void showInfoDialog(BuildContext context, String title, String des) {}
 void showErrorDialog(BuildContext context, String title, String des) {
   AwesomeDialog(
+      width: 350.0,
       context: context,
       title: title,
       desc: des,

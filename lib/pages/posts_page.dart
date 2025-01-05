@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/components/loading_chat_indicator.dart';
 import 'package:flutter_chat/components/post_list_tile.dart';
 import 'package:flutter_chat/components/posts/post_edit.dart';
 import 'package:flutter_chat/services/posts_database.dart';
@@ -27,7 +28,9 @@ class _PostsPageState extends State<PostsPage> {
               stream: postDataBase.getPostsStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: LoadingChatIndicator(),
+                  );
                 } else if (snapshot.hasError) {
                   return Text("Error");
                 } else if (snapshot.hasData) {
@@ -47,7 +50,9 @@ class _PostsPageState extends State<PostsPage> {
                     );
                   }
                 }
-                return CircularProgressIndicator();
+                return Center(
+                  child: LoadingChatIndicator(),
+                );
               },
             ),
           ),

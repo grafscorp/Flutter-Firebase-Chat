@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/models/user_chat.dart';
+import 'package:flutter_chat/pages/message_user_page.dart';
 
 class MessageListTile extends StatelessWidget {
-  MessageListTile(
-      {super.key, required this.userName, this.newMessages, this.userAvatar});
-  String? userAvatar;
-  String userName;
-  int? newMessages;
+  MessageListTile({super.key, required this.user, this.newMessages});
+
+  final UserChat user;
+  final int? newMessages;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -14,7 +15,7 @@ class MessageListTile extends StatelessWidget {
         radius: 30,
         foregroundImage: AssetImage("assets/images/template_avatar.png"),
       ),
-      title: Text(userName),
+      title: Text(user.username),
       trailing: newMessages != null
           ? CircleAvatar(
               backgroundColor: Colors.red,
@@ -26,7 +27,13 @@ class MessageListTile extends StatelessWidget {
               ),
             )
           : null,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MessageUserPage(toUser: user),
+            ));
+      },
     );
   }
 }

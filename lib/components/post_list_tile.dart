@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 
 class PostListTile extends StatelessWidget {
   PostListTile(
-      {super.key, required this.userName, required this.data, this.time});
+      {super.key,
+      required this.userName,
+      required this.data,
+      this.time,
+      this.userNameAvatar});
 
-  String? userNameAvatar;
-  String? userName;
-  String data;
-  Timestamp? time;
+  final String? userNameAvatar;
+  final String? userName;
+  final String data;
+  final Timestamp? time;
 
   @override
   Widget build(BuildContext context) {

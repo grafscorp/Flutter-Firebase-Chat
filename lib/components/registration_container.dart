@@ -1,13 +1,11 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/provider/login_provider.dart';
 import 'package:flutter_chat/services/login_auth_service.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationContainer extends StatefulWidget {
-  const RegistrationContainer({super.key});
-
+  const RegistrationContainer({super.key, required this.wightFileds});
+  final double wightFileds;
   @override
   State<RegistrationContainer> createState() => _RegistrationContainerState();
 }
@@ -22,8 +20,6 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
   bool isPasswordValid = true;
   bool isRePasswordValid = true;
 
-  void createUser() async {}
-
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginProvider>(
@@ -31,13 +27,16 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TextField(
-            controller: userTextController,
-            decoration: InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: "Username",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
+          SizedBox(
+            width: widget.wightFileds,
+            child: TextField(
+              controller: userTextController,
+              decoration: InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Username",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
               ),
             ),
           ),
@@ -45,46 +44,53 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
             height: 15,
           ),
           //Password field
-          TextField(
-            controller: passwordFieldController,
-            obscureText: true,
-            decoration: InputDecoration(
-                icon: Icon(Icons.shield),
-                hintText: "Password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                errorText: !isPasswordValid
-                    ? "Password should have from $minPasswordLenght to $maxPasswordLenght."
-                    : null),
-            onChanged: (inputPassText) {
-              setState(() {
-                isPasswordValid = !(inputPassText.length > maxPasswordLenght ||
-                    inputPassText.length < minPasswordLenght);
-              });
-            },
+          SizedBox(
+            width: widget.wightFileds,
+            child: TextField(
+              controller: passwordFieldController,
+              obscureText: true,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.shield),
+                  hintText: "Password",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  errorText: !isPasswordValid
+                      ? "Password should have from $minPasswordLenght to $maxPasswordLenght."
+                      : null),
+              onChanged: (inputPassText) {
+                setState(() {
+                  isPasswordValid =
+                      !(inputPassText.length > maxPasswordLenght ||
+                          inputPassText.length < minPasswordLenght);
+                });
+              },
+            ),
           ),
           SizedBox(
             height: 15,
           ),
           //Repeat Password Field
-          TextField(
-              controller: rePasswordFieldController,
-              obscureText: true,
-              decoration: InputDecoration(
-                  icon: Icon(Icons.shield),
-                  hintText: "Confirm Password",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  errorText:
-                      !isRePasswordValid ? "Passwords arent same" : null),
-              onChanged: (inputRePassText) {
-                setState(() {
-                  isRePasswordValid =
-                      !(inputRePassText != passwordFieldController.text);
-                });
-              }),
+          SizedBox(
+            width: widget.wightFileds,
+            child: TextField(
+                controller: rePasswordFieldController,
+                obscureText: true,
+                decoration: InputDecoration(
+                    icon: Icon(Icons.shield),
+                    hintText: "Confirm Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    errorText:
+                        !isRePasswordValid ? "Passwords arent same" : null),
+                onChanged: (inputRePassText) {
+                  setState(() {
+                    isRePasswordValid =
+                        !(inputRePassText != passwordFieldController.text);
+                  });
+                }),
+          ),
           SizedBox(
             height: 30,
           ),
@@ -98,7 +104,8 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
             ),
             onPressed: () async {
               if (isPasswordValid && isRePasswordValid) {
-                LoginAuthService.createUser(userTextController.text,
+                //
+                await LoginAuthService.createUser(userTextController.text,
                     passwordFieldController.text, context);
               }
             },
@@ -113,6 +120,7 @@ class _RegistrationContainerState extends State<RegistrationContainer> {
           //Log Out Button
           ElevatedButton(
             onPressed: () {
+              //
               loginProvider.changeLoginPage(isCreateAccount: false);
             },
             child: Text("Log In"),

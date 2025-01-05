@@ -8,18 +8,24 @@ import 'package:flutter_chat/services/chat_service.dart';
 
 class MessageList extends StatefulWidget {
   MessageList({super.key, required this.toUser});
-  UserChat toUser;
+  final UserChat toUser;
   @override
   State<MessageList> createState() => _MessageListState();
 }
 
 class _MessageListState extends State<MessageList> {
+  @override
+  void initState() {
+    super.initState();
+    setInitMessage();
+  }
+
   final _chatService = ChatService();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: _chatService.getMessages(
-          widget.toUser.uid, FirebaseAuth.instance.currentUser!.uid),
+          widget.toUser.email, FirebaseAuth.instance.currentUser!.email),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text("Loading");
@@ -42,5 +48,9 @@ class _MessageListState extends State<MessageList> {
   Widget _buildMessageBox(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return MessageBox(msgData: MessageChat.fromMap(data));
+  }
+
+  void setInitMessage() async {
+    await _chatService.initMessage(widget.toUser);
   }
 }
