@@ -18,8 +18,6 @@ class UserListTileCircle extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(20),
           margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: Theme.of(context).highlightColor),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
