@@ -39,6 +39,16 @@ class _MessagesPageState extends State<MessagesPage> {
             List<UserChat> usersChat = snapshot.data!;
 
             return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.surface,
+                      Theme.of(context).colorScheme.surface,
+                      const Color.fromARGB(251, 50, 20, 64)
+                    ],
+                    begin: AlignmentDirectional.topCenter,
+                    end: AlignmentDirectional.bottomCenter),
+              ),
               constraints: BoxConstraints(maxWidth: 700),
               child: ListView.builder(
                 itemCount: usersChat.length,
