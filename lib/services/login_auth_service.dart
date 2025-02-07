@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/components/info_dialogs.dart';
 
+
+
 class LoginAuthService {
   static const String userMail = "@flutterchat.com";
 
